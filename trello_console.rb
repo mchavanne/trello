@@ -15,9 +15,17 @@ cards.each do |card_hash|
 
 end
 
+require_relative "secrets"
+
 if ARGV[0] == "list"
 	puts cards_infos
+elsif ARGV[0] == "create"
+	response = Faraday.post("https://api.trello.com/1/cards?",
+	{"key" => API_KEY, "token" => API_TOKEN, "name"=> ARGV[1], "desc" => ARGV[2], "idList" => "5bb39ee0029f335fb88aa2a9"})
+	puts "New card created"
 else 
 	puts "error"
+
 end
+
 
